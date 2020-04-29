@@ -1,5 +1,12 @@
 # react-select
 
+## 3.1.1
+
+### Patch Changes
+
+- [c8d74bd5](https://github.com/JedWatson/react-select/commit/c8d74bd5710b1db6736837fb4334a59e46614a27) [#3979](https://github.com/JedWatson/react-select/pull/3979) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Fix repository field
+- [32ad5c04](https://github.com/JedWatson/react-select/commit/32ad5c040bdd96cd1ca71010c2558842d684629c) [#3892](https://github.com/JedWatson/react-select/pull/3892) Thanks [@flexdinesh](https://github.com/flexdinesh)! - Fix react-select ignoring HTML5 "form" attribute
+
 ## 3.1.0
 
 ### Minor Changes
