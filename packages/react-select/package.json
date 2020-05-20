@@ -1,20 +1,20 @@
 {
-  "name": "react-select",
-  "version": "3.1.0",
-  "description": "A Select control built with and for ReactJS",
+  "name": "react-draggable-multi-select",
+  "version": "1.1.1",
+  "description": "A Select control built with and for ReactJS, support draggable tags in multi select",
   "main": "dist/react-select.cjs.js",
   "module": "dist/react-select.esm.js",
   "sideEffects": false,
-  "author": "Jed Watson",
+  "author": "Sojin antony | Jed Watson",
   "license": "MIT",
-  "repository": "https://github.com/JedWatson/react-select/tree/master/packages/react-select",
+  "repository": "https://github.com/sojinantony01/react-select/",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@emotion/cache": "^10.0.9",
     "@emotion/core": "^10.0.9",
     "@emotion/css": "^10.0.9",
     "memoize-one": "^5.0.0",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.7.2",
     "react-input-autosize": "^2.2.2",
     "react-transition-group": "^4.3.0"
   },
@@ -47,7 +47,8 @@
     "react",
     "react-component",
     "select",
-    "ui"
+    "ui",
+    "draggable multi select"
   ],
   "preconstruct": {
     "entrypoints": [

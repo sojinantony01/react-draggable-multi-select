@@ -139,7 +139,7 @@ const MultiValue = (props: MultiValueProps) => {
                   },
                   className
                 )
-              ),
+              ) + ' tag-key',
             }}
             selectProps={selectProps}
           >

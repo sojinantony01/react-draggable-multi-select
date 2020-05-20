@@ -6,7 +6,7 @@
 # React-Select
 
 The Select control for [React](https://reactjs.com). Initially built for use in [KeystoneJS](http://www.keystonejs.com).
-
+Support draggable tags in multi select (isMulti = true)
 See [react-select.com](https://www.react-select.com) for live demos and comprehensive docs.
 
 See our [upgrade guide](https://github.com/JedWatson/react-select/issues/3585) for a breakdown on how to upgrade from v2 to v3.

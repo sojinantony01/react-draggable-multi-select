@@ -946,7 +946,9 @@ export default class Select extends Component<Props, State> {
       event.target.tagName !== 'INPUT' &&
       event.target.tagName !== 'TEXTAREA'
     ) {
-      event.preventDefault();
+      if(!event.target.className || event.target.className.indexOf('tag-key') == -1) {
+        event.preventDefault();
+      }
     }
   };
   onDropdownIndicatorMouseDown = (event: MouseOrTouchEvent) => {
@@ -1472,6 +1474,27 @@ export default class Select extends Component<Props, State> {
       />
     );
   }
+  onDrag (event, index){
+    this.setState({dragItem:this.state.selectValue[index]})
+    event.preventDefault();
+  }
+
+  onDragOver(event)  {
+    event.preventDefault();
+  }
+
+  onDrop(event , index)  {
+    event.preventDefault()
+    let selectValueTemp = this.state.selectValue
+    var i = selectValueTemp.indexOf(this.state.dragItem);
+    if(this.state.dragItem && index !== i) {
+      selectValueTemp.splice(index > i ? index+1:index, 0, this.state.dragItem)
+      selectValueTemp.splice(i > index ? i+1 : i, 1);
+      this.setState({selectValue:selectValueTemp, dragItem: undefined})
+      this.onChange(selectValueTemp)
+      console.log(selectValueTemp)
+    }
+  }
   renderPlaceholderOrValue(): ?PlaceholderOrValue {
     const {
       MultiValue,
@@ -1505,33 +1528,50 @@ export default class Select extends Component<Props, State> {
     }
 
     if (isMulti) {
-      const selectValues: Array<any> = selectValue.map((opt, index) => {
-        const isOptionFocused = opt === focusedValue;
 
+      const selectValues: Array<any> = selectValue.map((opt, index) => {
+      const isOptionFocused = opt === focusedValue;
+
+      
         return (
-          <MultiValue
-            {...commonProps}
-            components={{
-              Container: MultiValueContainer,
-              Label: MultiValueLabel,
-              Remove: MultiValueRemove,
-            }}
-            isFocused={isOptionFocused}
-            isDisabled={isDisabled}
-            key={this.getOptionValue(opt)}
-            index={index}
-            removeProps={{
-              onClick: () => this.removeValue(opt),
-              onTouchEnd: () => this.removeValue(opt),
-              onMouseDown: e => {
-                e.preventDefault();
-                e.stopPropagation();
-              },
-            }}
-            data={opt}
-          >
-            {this.formatOptionLabel(opt, 'value')}
-          </MultiValue>
+          <>
+          <div 
+            draggable
+            onDrag={(event) => this.onDrag(event, index)}
+            onDrop={event => this.onDrop(event, index)}
+            onDragOver={(event => this.onDragOver(event))}
+            key={'key'+index}
+            >
+              <MultiValue
+                {...commonProps}
+                components={{
+                  Container: MultiValueContainer,
+                  Label: MultiValueLabel,
+                  Remove: MultiValueRemove,
+                }}
+                isFocused={isOptionFocused}
+                isDisabled={isDisabled}
+                key={this.getOptionValue(opt)}
+                index={index}
+                removeProps={{
+                  onClick: () => this.removeValue(opt),
+                  onTouchEnd: () => this.removeValue(opt),
+                  onMouseDown: e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  },
+                }}
+                data={opt}
+              >
+                {this.formatOptionLabel(opt, 'value')}
+            </MultiValue>
+          </div>
+          {/* <div  style={{width:10, height:10}}
+            onDrop={event => this.onDrop(event, index)}
+            onDragOver={(event => this.onDragOver(event))}
+            >
+          </div> */}
+          </>
         );
       });
       return selectValues;
@@ -1861,6 +1901,7 @@ export default class Select extends Component<Props, State> {
             {this.renderPlaceholderOrValue()}
             {this.renderInput()}
           </ValueContainer>
+          
           <IndicatorsContainer {...commonProps} isDisabled={isDisabled}>
             {this.renderClearIndicator()}
             {this.renderLoadingIndicator()}

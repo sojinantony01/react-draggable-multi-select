@@ -1,13 +1,13 @@
 {
-  "name": "@react-select/monorepo",
-  "private": true,
-  "version": "1.0.0",
+  "name": "react-draggable-multi-select",
+  "private": false,
+  "version": "1.0.1",
   "description": "A Select control built with and for ReactJS",
-  "author": "Jed Watson",
+  "author": " Sojin antony | Jed Watson",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JedWatson/react-select.git"
+    "url": "https://github.com/sojinantony01/react-select"
   },
   "dependencies": {
     "@atlaskit/button": "^7.0.2",
@@ -109,6 +109,8 @@
     "dist",
     "src"
   ],
+  "main": "packages/react-select/index.js",
+  "module": "packages/react-select/",
   "keywords": [
     "combobox",
     "form",
