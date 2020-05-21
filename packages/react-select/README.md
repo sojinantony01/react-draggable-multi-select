@@ -3,12 +3,25 @@
 [![Coverage Status](https://coveralls.io/repos/JedWatson/react-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/JedWatson/react-select?branch=master)
 [![Supported by Thinkmill](https://thinkmill.github.io/badge/heart.svg)](http://thinkmill.com.au/?utm_source=github&utm_medium=badge&utm_campaign=react-select)
 
-# React-Select
+# React--Draggable-multi-Select
 
 The Select control for [React](https://reactjs.com). Initially built for use in [KeystoneJS](http://www.keystonejs.com).
 
 Support draggable tags in multi select (isMulti = true)
 
+Support all other react select features
+
+sample code 
+```
+    <Select
+      className=""
+      isMulti
+      value={value}
+      onChange={(e) => {setVal(e); console.log(e)}}
+      options={options}
+      closeMenuOnSelect={false} //add if needed
+  />
+```
 See [react-select.com](https://www.react-select.com) for live demos and comprehensive docs.
 
 See our [upgrade guide](https://github.com/JedWatson/react-select/issues/3585) for a breakdown on how to upgrade from v2 to v3.
@@ -120,6 +133,9 @@ Check the docs for more information on:
 - [Creating an async select](https://www.react-select.com/async)
 - [Allowing users to create new options](https://www.react-select.com/creatable)
 - [Advanced use-cases](https://www.react-select.com/advanced)
+
+
+Sojin Antony
 
 # Thanks
 
