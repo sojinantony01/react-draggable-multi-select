@@ -1482,7 +1482,6 @@ export default class Select extends Component<Props, State> {
   onDragOver(event, index)  {
     if(index !== this.state.increaseSpace) {
       this.setState({increaseSpace: index})
-      console.log('dragOver', index)
     }
     event.preventDefault();
   }
