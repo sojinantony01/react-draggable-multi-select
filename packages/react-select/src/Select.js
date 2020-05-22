@@ -1475,13 +1475,17 @@ export default class Select extends Component<Props, State> {
     );
   }
   onDrag (event, index){
-    this.setState({dragItem:this.state.selectValue[index]})
+    let prevState = this.state;
+    prevState.dragItem = this.state.selectValue[index]
+    this.setState(prevState)
     event.preventDefault();
   }
 
   onDragOver(event, index)  {
     if(index !== this.state.increaseSpace) {
-      this.setState({increaseSpace: index})
+      let prevState = this.state;
+      prevState.increaseSpace = index;
+      this.setState(prevState)
     }
     event.preventDefault();
   }
@@ -1493,12 +1497,18 @@ export default class Select extends Component<Props, State> {
     if(this.state.dragItem && index !== i) {
       selectValueTemp.splice(index > i ? index+1:index, 0, this.state.dragItem)
       selectValueTemp.splice(i > index ? i+1 : i, 1);
-      this.setState({selectValue:selectValueTemp, dragItem: undefined, increaseSpace: undefined})
+      let prevState = this.state;
+      prevState.selectValue = selectValueTemp;
+      prevState.dragItem = undefined;
+      prevState.increaseSpace= undefined;
+      this.setState(prevState)
       this.onChange(selectValueTemp)
     }
   }
   ondragleave(index) {
-      this.setState({increaseSpace:undefined})
+    let prevState = this.state;
+    prevState.increaseSpace = undefined;
+    this.setState(prevState)  
   }
   renderPlaceholderOrValue(): ?PlaceholderOrValue {
     const {
@@ -1545,10 +1555,9 @@ export default class Select extends Component<Props, State> {
             onDrag={(event) => this.onDrag(event, index)}
             onDrop={event => this.onDrop(event, index)}
             onDragOver={(event => this.onDragOver(event, index))}
-            ondragend={(event => this.ondragleave(index))}
+            onDragEnd={(event => this.ondragleave(index, 1))}
             key={'key'+index}
-            ondragleave={(event => this.ondragleave(index))}
-            style={(this.state.increaseSpace === index) && this.state.dragItem ? (index > dragItemIndex ? {paddingRight:40} : {paddingLeft:40}):{}}
+            style={(this.state.increaseSpace !== dragItemIndex && this.state.increaseSpace === index) && this.state.dragItem ? (index > dragItemIndex ? {paddingRight:40} : {paddingLeft:40}):{}}
             >
               <MultiValue
                 {...commonProps}
