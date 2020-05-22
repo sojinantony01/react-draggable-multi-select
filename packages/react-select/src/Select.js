@@ -1479,7 +1479,11 @@ export default class Select extends Component<Props, State> {
     event.preventDefault();
   }
 
-  onDragOver(event)  {
+  onDragOver(event, index)  {
+    if(index !== this.state.increaseSpace) {
+      this.setState({increaseSpace: index})
+      console.log('dragOver', index)
+    }
     event.preventDefault();
   }
 
@@ -1490,10 +1494,12 @@ export default class Select extends Component<Props, State> {
     if(this.state.dragItem && index !== i) {
       selectValueTemp.splice(index > i ? index+1:index, 0, this.state.dragItem)
       selectValueTemp.splice(i > index ? i+1 : i, 1);
-      this.setState({selectValue:selectValueTemp, dragItem: undefined})
+      this.setState({selectValue:selectValueTemp, dragItem: undefined, increaseSpace: undefined})
       this.onChange(selectValueTemp)
-      console.log(selectValueTemp)
     }
+  }
+  ondragleave(index) {
+      this.setState({increaseSpace:undefined})
   }
   renderPlaceholderOrValue(): ?PlaceholderOrValue {
     const {
@@ -1531,7 +1537,7 @@ export default class Select extends Component<Props, State> {
 
       const selectValues: Array<any> = selectValue.map((opt, index) => {
       const isOptionFocused = opt === focusedValue;
-
+      var dragItemIndex = selectValue.indexOf(this.state.dragItem);
       
         return (
           <>
@@ -1539,8 +1545,11 @@ export default class Select extends Component<Props, State> {
             draggable
             onDrag={(event) => this.onDrag(event, index)}
             onDrop={event => this.onDrop(event, index)}
-            onDragOver={(event => this.onDragOver(event))}
+            onDragOver={(event => this.onDragOver(event, index))}
+            ondragend={(event => this.ondragleave(index))}
             key={'key'+index}
+            ondragleave={(event => this.ondragleave(index))}
+            style={(this.state.increaseSpace === index) && this.state.dragItem ? (index > dragItemIndex ? {paddingRight:40} : {paddingLeft:40}):{}}
             >
               <MultiValue
                 {...commonProps}
